@@ -10,6 +10,7 @@ class TaskManagement extends Component {
   state = {
     inputValue: '',
     todoList: [],
+    search: '',
     errorMSg: '',
   }
 
@@ -30,6 +31,10 @@ class TaskManagement extends Component {
       todoList: [...prevState.todoList, newList],
       inputValue: '',
     }))
+  }
+
+  searchInput = event => {
+    this.setState({search: event.target.value})
   }
 
   onChangeInputValue = e => {
@@ -62,16 +67,32 @@ class TaskManagement extends Component {
     })
   }
 
+  renderSearchBar = () => (
+    <div className="search-input-container">
+      <input type="search" className="search-input" />
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/destinations-search-icon-img.png "
+        alt="search icon"
+        className="search-icon"
+        onChange={this.searchInput}
+      />
+    </div>
+  )
+
   renderTodoLists = () => {
-    const {todoList} = this.state
+    const {todoList, search} = this.state
+    const searchResults = todoList.filter(eachData =>
+      eachData.inputValue.toLowerCase().includes(search.toLowerCase()),
+    )
 
     return (
       <ul className="todo-ul">
-        {todoList.map(eachData => (
+        {searchResults.map(eachData => (
           <TodoLists
             key={eachData.id}
             todoLists={eachData}
             deleteList={this.deleteList}
+            editList={this.editList}
           />
         ))}
       </ul>
@@ -79,6 +100,8 @@ class TaskManagement extends Component {
   }
 
   render() {
+    const {search} = this.state
+    console.log(search)
     return (
       <>
         <div className="task-management-container">
@@ -86,6 +109,7 @@ class TaskManagement extends Component {
           <div className="input-container">
             {this.renderInputContainer()}
             <p className="my-tasks">My Tasks</p>
+            {this.renderSearchBar()}
             {this.renderTodoLists()}
           </div>
         </div>

@@ -18,10 +18,32 @@
   margin: 0;
 }
 
+.task-line-through {
+  font-family: 'Roboto';
+  text-decoration-line: line-through;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+
+.input-value-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .delete-button {
   background-color: transparent;
   border: none;
   outline: none;
   cursor: pointer;
-  margin-left: 32px;
+  margin-left: 5px;
 }

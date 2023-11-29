@@ -4,26 +4,51 @@ import {AiFillCloseCircle} from 'react-icons/ai'
 import './index.css'
 
 class TodoLists extends Component {
+  state = {
+    onSubmit: false,
+  }
+
+  onClickCheckbox = () => {
+    this.setState(prevState => ({
+      onSubmit: !prevState.onSubmit,
+    }))
+  }
+
   render() {
     const {todoLists, deleteList} = this.props
-
     const {inputValue, id} = todoLists
 
-    const onRemoveCartItem = () => {
+    const onRemoveList = () => {
       deleteList(id)
     }
+
+    const {onSubmit} = this.state
+
+    const inputClassName = onSubmit ? 'task-line-through' : 'task'
 
     return (
       <>
         <li className="todo-li">
-          <p className="task">{inputValue}</p>
-          <button
-            className="delete-button"
-            type="button"
-            onClick={onRemoveCartItem}
-          >
-            <AiFillCloseCircle color="#616E7C" size={20} />
-          </button>
+          <div className="input-value-container">
+            <input
+              type="checkbox"
+              className="check-box-input"
+              onClick={this.onClickCheckbox}
+            />
+            <p className={inputClassName}>{inputValue}</p>
+          </div>
+          <div className="buttons-container">
+            <button className="delete-button" type="button">
+              E
+            </button>
+            <button
+              className="delete-button"
+              type="button"
+              onClick={onRemoveList}
+            >
+              <AiFillCloseCircle color="#ffffff" size={20} />
+            </button>
+          </div>
         </li>
       </>
     )
