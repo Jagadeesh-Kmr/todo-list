@@ -23,7 +23,6 @@ class TodoLists extends Component {
     }
 
     const {onSubmit} = this.state
-
     const inputClassName = onSubmit ? 'task-line-through' : 'task'
 
     return (
@@ -38,9 +37,6 @@ class TodoLists extends Component {
             <p className={inputClassName}>{inputValue}</p>
           </div>
           <div className="buttons-container">
-            <button className="delete-button" type="button">
-              E
-            </button>
             <button
               className="delete-button"
               type="button"

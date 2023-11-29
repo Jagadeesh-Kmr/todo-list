@@ -28,6 +28,12 @@
   margin: 0;
 }
 
+.check-box-input {
+  border: 0;
+  width: 15px;
+  height: 15px;
+}
+
 .input-value-container {
   display: flex;
   justify-content: center;

@@ -3,6 +3,7 @@ import {Component} from 'react'
 import {v4 as uuidv4} from 'uuid'
 
 import TodoLists from '../TodoLists'
+import ReactPopup from '../ReactPopup'
 
 import './index.css'
 
@@ -11,8 +12,13 @@ class TaskManagement extends Component {
     inputValue: '',
     todoList: [],
     search: '',
-    errorMSg: '',
   }
+
+  renderPopup = () => (
+    <>
+      <ReactPopup />
+    </>
+  )
 
   onSubmitForm = event => {
     event.preventDefault()
@@ -23,9 +29,7 @@ class TaskManagement extends Component {
       inputValue,
     }
     if (inputValue.length === 0) {
-      this.setState({errorMSg: '*Required Details'})
-    } else {
-      this.setState({errorMSg: ''})
+      this.renderPopup()
     }
     this.setState(prevState => ({
       todoList: [...prevState.todoList, newList],
@@ -33,16 +37,12 @@ class TaskManagement extends Component {
     }))
   }
 
-  searchInput = event => {
-    this.setState({search: event.target.value})
-  }
-
   onChangeInputValue = e => {
     this.setState({inputValue: e.target.value})
   }
 
   renderInputContainer = () => {
-    const {inputValue, errorMSg} = this.state
+    const {inputValue} = this.state
     return (
       <form className="form-container" onSubmit={this.onSubmitForm}>
         <input
@@ -51,7 +51,6 @@ class TaskManagement extends Component {
           onChange={this.onChangeInputValue}
           value={inputValue}
         />
-        <p>{errorMSg}</p>
         <button type="submit" className="button">
           Add Task
         </button>
@@ -67,14 +66,21 @@ class TaskManagement extends Component {
     })
   }
 
+  searchInput = event => {
+    this.setState({search: event.target.value})
+  }
+
   renderSearchBar = () => (
     <div className="search-input-container">
-      <input type="search" className="search-input" />
+      <input
+        type="search"
+        className="search-input"
+        onChange={this.searchInput}
+      />
       <img
         src="https://assets.ccbp.in/frontend/react-js/destinations-search-icon-img.png "
         alt="search icon"
         className="search-icon"
-        onChange={this.searchInput}
       />
     </div>
   )
@@ -92,7 +98,6 @@ class TaskManagement extends Component {
             key={eachData.id}
             todoLists={eachData}
             deleteList={this.deleteList}
-            editList={this.editList}
           />
         ))}
       </ul>
@@ -100,8 +105,6 @@ class TaskManagement extends Component {
   }
 
   render() {
-    const {search} = this.state
-    console.log(search)
     return (
       <>
         <div className="task-management-container">
@@ -119,17 +122,3 @@ class TaskManagement extends Component {
 }
 
 export default TaskManagement
-
-/*
- renderTodoLists = () => {
-    const {todoList} = this.state
-
-    return (
-      <ul className="todo-ul">
-        {todoList.map(eachData => (
-          <TodoLists key={eachData.id} todoLists={eachData} />
-        ))}
-      </ul>
-    )
-  }
-*/
