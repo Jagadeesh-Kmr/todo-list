@@ -15,22 +15,22 @@ class TodoLists extends Component {
   }
 
   render() {
-    const {todoLists, deleteList} = this.props
+    const {todoLists, deleteList, emptyInputValue} = this.props
     const {inputValue, id} = todoLists
 
     const onRemoveList = () => {
       deleteList(id)
     }
 
+    const inputLen = inputValue.length === 0
+
     const {onSubmit} = this.state
     const inputClassName = onSubmit ? 'task-line-through' : 'task'
 
     return (
       <>
-        {inputValue.length === 0 ? (
-          <div className="empty-list-container">
-            <h1 className="empty-list-heading">No Tasks Yet!</h1>
-          </div>
+        {inputLen ? (
+          <p className="empty-list-heading">{emptyInputValue}</p>
         ) : (
           <li className="todo-li">
             <div className="input-value-container">

@@ -12,6 +12,7 @@ class TaskManagement extends Component {
     todoList: [],
     search: '',
     errorMsg: '',
+    emptyInput: '',
   }
 
   onSubmitForm = event => {
@@ -23,13 +24,14 @@ class TaskManagement extends Component {
       inputValue,
     }
     if (inputValue.length === 0) {
-      this.setState({errorMsg: '*Enter Task'})
+      this.setState({errorMsg: '*Enter Task', emptyInput: 'No Tasks Yet!'})
     } else {
-      this.setState({errorMsg: ''})
+      this.setState({errorMsg: '', emptyInput: ''})
     }
     this.setState(prevState => ({
       todoList: [...prevState.todoList, newList],
       inputValue: '',
+      emptyInput: '',
     }))
   }
 
@@ -83,7 +85,7 @@ class TaskManagement extends Component {
   )
 
   renderTodoLists = () => {
-    const {todoList, search} = this.state
+    const {todoList, search, emptyInput} = this.state
     const searchResults = todoList.filter(eachData =>
       eachData.inputValue.toLowerCase().includes(search.toLowerCase()),
     )
@@ -95,6 +97,7 @@ class TaskManagement extends Component {
             key={eachData.id}
             todoLists={eachData}
             deleteList={this.deleteList}
+            emptyInputValue={emptyInput}
           />
         ))}
       </ul>
