@@ -53,3 +53,29 @@
   cursor: pointer;
   margin-left: 5px;
 }
+
+@media screen and (max-width: 768px) {
+  .todo-li {
+    width: 240px;
+  }
+}
+
+.empty-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 760px;
+}
+
+.empty-list-heading {
+  font-family: DM Sans;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 48px;
+  letter-spacing: 0px;
+  text-align: center;
+  margin-bottom: 0;
+  color: #1e293b;
+}

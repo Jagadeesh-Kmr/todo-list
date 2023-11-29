@@ -27,25 +27,31 @@ class TodoLists extends Component {
 
     return (
       <>
-        <li className="todo-li">
-          <div className="input-value-container">
-            <input
-              type="checkbox"
-              className="check-box-input"
-              onClick={this.onClickCheckbox}
-            />
-            <p className={inputClassName}>{inputValue}</p>
+        {inputValue.length === 0 ? (
+          <div className="empty-list-container">
+            <h1 className="empty-list-heading">No Tasks Yet!</h1>
           </div>
-          <div className="buttons-container">
-            <button
-              className="delete-button"
-              type="button"
-              onClick={onRemoveList}
-            >
-              <AiFillCloseCircle color="#ffffff" size={20} />
-            </button>
-          </div>
-        </li>
+        ) : (
+          <li className="todo-li">
+            <div className="input-value-container">
+              <input
+                type="checkbox"
+                className="check-box-input"
+                onClick={this.onClickCheckbox}
+              />
+              <p className={inputClassName}>{inputValue}</p>
+            </div>
+            <div className="buttons-container">
+              <button
+                className="delete-button"
+                type="button"
+                onClick={onRemoveList}
+              >
+                <AiFillCloseCircle color="#ffffff" size={20} />
+              </button>
+            </div>
+          </li>
+        )}
       </>
     )
   }

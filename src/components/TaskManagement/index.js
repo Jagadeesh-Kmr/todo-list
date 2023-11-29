@@ -3,7 +3,6 @@ import {Component} from 'react'
 import {v4 as uuidv4} from 'uuid'
 
 import TodoLists from '../TodoLists'
-import ReactPopup from '../ReactPopup'
 
 import './index.css'
 
@@ -12,13 +11,8 @@ class TaskManagement extends Component {
     inputValue: '',
     todoList: [],
     search: '',
+    errorMsg: '',
   }
-
-  renderPopup = () => (
-    <>
-      <ReactPopup />
-    </>
-  )
 
   onSubmitForm = event => {
     event.preventDefault()
@@ -29,7 +23,9 @@ class TaskManagement extends Component {
       inputValue,
     }
     if (inputValue.length === 0) {
-      this.renderPopup()
+      this.setState({errorMsg: '*Enter Task'})
+    } else {
+      this.setState({errorMsg: ''})
     }
     this.setState(prevState => ({
       todoList: [...prevState.todoList, newList],
@@ -42,7 +38,7 @@ class TaskManagement extends Component {
   }
 
   renderInputContainer = () => {
-    const {inputValue} = this.state
+    const {inputValue, errorMsg} = this.state
     return (
       <form className="form-container" onSubmit={this.onSubmitForm}>
         <input
@@ -51,6 +47,7 @@ class TaskManagement extends Component {
           onChange={this.onChangeInputValue}
           value={inputValue}
         />
+        <p className="error-msg">{errorMsg}</p>
         <button type="submit" className="button">
           Add Task
         </button>
