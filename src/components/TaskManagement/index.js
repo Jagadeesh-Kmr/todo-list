@@ -54,13 +54,25 @@ class TaskManagement extends Component {
     )
   }
 
+  deleteList = id => {
+    const {todoList} = this.state
+    const updatedList = todoList.filter(eachData => eachData.id !== id)
+    this.setState({
+      todoList: updatedList,
+    })
+  }
+
   renderTodoLists = () => {
     const {todoList} = this.state
 
     return (
       <ul className="todo-ul">
         {todoList.map(eachData => (
-          <TodoLists key={eachData.id} todoLists={eachData} />
+          <TodoLists
+            key={eachData.id}
+            todoLists={eachData}
+            deleteList={this.deleteList}
+          />
         ))}
       </ul>
     )
@@ -71,8 +83,11 @@ class TaskManagement extends Component {
       <>
         <div className="task-management-container">
           <h1 className="task-management-h1">Task Management</h1>
-          <div className="input-container">{this.renderInputContainer()}</div>
-          <div>{this.renderTodoLists()}</div>
+          <div className="input-container">
+            {this.renderInputContainer()}
+            <p className="my-tasks">My Tasks</p>
+            {this.renderTodoLists()}
+          </div>
         </div>
       </>
     )
