@@ -10,9 +10,12 @@ class TodoLists extends Component {
   }
 
   onClickCheckbox = () => {
+    const {isCheckId, todoLists} = this.props
+
     this.setState(prevState => ({
       onSubmit: !prevState.onSubmit,
     }))
+    isCheckId(todoLists.id)
   }
 
   render() {

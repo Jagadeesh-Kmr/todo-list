@@ -13,15 +13,17 @@ class TaskManagement extends Component {
     search: '',
     errorMsg: '',
     emptyInput: '',
+    checked: false,
   }
 
   onSubmitForm = event => {
     event.preventDefault()
 
-    const {inputValue} = this.state
+    const {inputValue, checked} = this.state
     const newList = {
       id: uuidv4(),
       inputValue,
+      checked,
     }
     if (inputValue.length === 0) {
       this.setState({errorMsg: '*Enter task', emptyInput: ''})
@@ -64,6 +66,7 @@ class TaskManagement extends Component {
     this.setState({
       todoList: updatedList,
     })
+    localStorage.removeItem('todoList')
   }
 
   editList = (id, newValue) => {
@@ -94,6 +97,21 @@ class TaskManagement extends Component {
     </div>
   )
 
+  isChecked = id => {
+    const {todoList} = this.state
+    const isCheckedId = todoList.map(eachData => eachData.id === id)
+    if (isCheckedId) {
+      this.setState(prevState => ({
+        checked: !prevState.checked,
+      }))
+    }
+  }
+
+  onClickSaveButton = () => {
+    const {todoList} = this.state
+    localStorage.setItem('todoList', JSON.stringify(todoList))
+  }
+
   renderTodoLists = () => {
     const {todoList, search, emptyInput} = this.state
     const searchResults = todoList.filter(eachData =>
@@ -109,9 +127,14 @@ class TaskManagement extends Component {
             deleteList={this.deleteList}
             editList={this.editList}
             emptyInputValue={emptyInput}
+            isCheckId={this.isChecked}
           />
         ))}
-        <button type="button" className="button">
+        <button
+          type="button"
+          className="button"
+          onClick={this.onClickSaveButton}
+        >
           Save
         </button>
       </ul>
