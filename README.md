@@ -15,7 +15,7 @@
   
  
 # Technologies Used
-  - React JS, JS, CSS, Bootstrap, Routing, Local Storage.
+  - React js, JS, HTML, CSS, Bootstrap, Routing, Local Storage.
 
 
 
