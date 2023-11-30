@@ -4,7 +4,7 @@ import {TiEdit} from 'react-icons/ti'
 
 import './index.css'
 
-class TodoLists extends Component {
+class StoredTodoList extends Component {
   onClickCheckbox = () => {
     const {isCheckId, todoLists} = this.props
 
@@ -70,4 +70,4 @@ class TodoLists extends Component {
   }
 }
 
-export default TodoLists
+export default StoredTodoList

@@ -38,4 +38,9 @@ export default App
       task: '',
     }))
   }
+
+  if (storedTask.length === 0) {
+      return []
+    }
+    return storedTask
 */

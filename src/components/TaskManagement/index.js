@@ -3,6 +3,7 @@ import {Component} from 'react'
 import {v4 as uuidv4} from 'uuid'
 
 import TodoLists from '../TodoLists'
+import StoredTodoList from '../StoredTodoList'
 
 import './index.css'
 
@@ -41,8 +42,7 @@ class TaskManagement extends Component {
   }
 
   renderInputContainer = () => {
-    const {inputValue, errorMsg, emptyInput} = this.state
-    console.log(emptyInput)
+    const {inputValue, errorMsg} = this.state
 
     return (
       <form className="form-container" onSubmit={this.onSubmitForm}>
@@ -112,8 +112,35 @@ class TaskManagement extends Component {
     localStorage.setItem('todoList', JSON.stringify(todoList))
   }
 
+  renderStoredList = () => {
+    const storedTask = JSON.parse(localStorage.getItem('todoList'))
+    const {emptyInput, checked} = this.state
+
+    return (
+      <>
+        {storedTask === null ? (
+          ''
+        ) : (
+          <ul className="todo-ul">
+            {storedTask.map(eachData => (
+              <StoredTodoList
+                key={eachData.id}
+                todoLists={eachData}
+                deleteList={this.deleteList}
+                editList={this.editList}
+                emptyInputValue={emptyInput}
+                isCheckId={this.isChecked}
+                checked={checked}
+              />
+            ))}
+          </ul>
+        )}
+      </>
+    )
+  }
+
   renderTodoLists = () => {
-    const {todoList, search, emptyInput} = this.state
+    const {todoList, search, emptyInput, checked} = this.state
     const searchResults = todoList.filter(eachData =>
       eachData.inputValue.toLowerCase().includes(search.toLowerCase()),
     )
@@ -128,15 +155,9 @@ class TaskManagement extends Component {
             editList={this.editList}
             emptyInputValue={emptyInput}
             isCheckId={this.isChecked}
+            checked={checked}
           />
         ))}
-        <button
-          type="button"
-          className="button"
-          onClick={this.onClickSaveButton}
-        >
-          Save
-        </button>
       </ul>
     )
   }
@@ -146,11 +167,20 @@ class TaskManagement extends Component {
       <>
         <div className="task-management-container">
           <h1 className="task-management-h1">Task Management</h1>
+          <p className="tasks">Create Task</p>
           <div className="input-container">
             {this.renderInputContainer()}
-            <p className="my-tasks">My Tasks</p>
+            <p className="tasks">My Tasks</p>
             {this.renderSearchBar()}
             {this.renderTodoLists()}
+            {this.renderStoredList()}
+            <button
+              type="button"
+              className="button"
+              onClick={this.onClickSaveButton}
+            >
+              Save
+            </button>
           </div>
         </div>
       </>
