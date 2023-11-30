@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import {AiFillCloseCircle} from 'react-icons/ai'
+import {TiEdit} from 'react-icons/ti'
 
 import './index.css'
 
@@ -15,11 +16,15 @@ class TodoLists extends Component {
   }
 
   render() {
-    const {todoLists, deleteList, emptyInputValue} = this.props
+    const {todoLists, deleteList, editList, emptyInputValue} = this.props
     const {inputValue, id} = todoLists
 
     const onRemoveList = () => {
       deleteList(id)
+    }
+
+    const onEditList = () => {
+      editList(id, inputValue)
     }
 
     const inputLen = inputValue.length === 0
@@ -43,7 +48,14 @@ class TodoLists extends Component {
             </div>
             <div className="buttons-container">
               <button
-                className="delete-button"
+                type="button"
+                className="icon-button"
+                onClick={onEditList}
+              >
+                <TiEdit color="#ffffff" size={20} />
+              </button>
+              <button
+                className="icon-button"
                 type="button"
                 onClick={onRemoveList}
               >

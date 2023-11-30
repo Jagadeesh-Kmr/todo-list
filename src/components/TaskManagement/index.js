@@ -65,6 +65,15 @@ class TaskManagement extends Component {
     })
   }
 
+  editList = (id, newValue) => {
+    const {todoList} = this.state
+    const updatedList = todoList.filter(eachData => eachData.id !== id)
+    this.setState({
+      todoList: updatedList,
+    })
+    this.setState({inputValue: newValue})
+  }
+
   searchInput = event => {
     this.setState({search: event.target.value})
   }
@@ -97,6 +106,7 @@ class TaskManagement extends Component {
             key={eachData.id}
             todoLists={eachData}
             deleteList={this.deleteList}
+            editList={this.editList}
             emptyInputValue={emptyInput}
           />
         ))}
