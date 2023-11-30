@@ -24,14 +24,13 @@ class TaskManagement extends Component {
       inputValue,
     }
     if (inputValue.length === 0) {
-      this.setState({errorMsg: '*Enter Task', emptyInput: 'No Tasks Yet!'})
+      this.setState({errorMsg: '*Enter task', emptyInput: ''})
     } else {
       this.setState({errorMsg: '', emptyInput: ''})
     }
     this.setState(prevState => ({
       todoList: [...prevState.todoList, newList],
       inputValue: '',
-      emptyInput: '',
     }))
   }
 
@@ -40,7 +39,9 @@ class TaskManagement extends Component {
   }
 
   renderInputContainer = () => {
-    const {inputValue, errorMsg} = this.state
+    const {inputValue, errorMsg, emptyInput} = this.state
+    console.log(emptyInput)
+
     return (
       <form className="form-container" onSubmit={this.onSubmitForm}>
         <input

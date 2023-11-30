@@ -7,7 +7,7 @@
   flex-direction: column;
   padding-top: 60px;
   padding-left: 60px;
-  min-height: 100vh;
+  background-size: cover;
   background-color: #0ea5e9;
 }
 
@@ -49,7 +49,7 @@
   }
 
   .task-management-container {
-    max-width: 100%;
+    width: 768px;
   }
 }
 
@@ -86,9 +86,9 @@
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  padding: 0;
   width: 1400px;
   height: 450px;
+  padding-top: 30px;
   flex-wrap: wrap;
 }
 
