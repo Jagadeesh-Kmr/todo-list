@@ -111,6 +111,9 @@ class TaskManagement extends Component {
             emptyInputValue={emptyInput}
           />
         ))}
+        <button type="button" className="button">
+          Save
+        </button>
       </ul>
     )
   }

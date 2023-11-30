@@ -64,6 +64,7 @@
   padding: 12px 15px 12px 15px;
   outline: none;
   cursor: pointer;
+  margin-top: 30px;
   margin-bottom: 30px;
 }
 
@@ -79,7 +80,6 @@
   font-size: 14px;
   padding-top: 0;
   margin-top: 0;
-  margin-bottom: 20px;
 }
 
 .todo-ul {
@@ -89,6 +89,7 @@
   width: 1400px;
   height: 450px;
   padding-top: 30px;
+  padding-left: 0;
   flex-wrap: wrap;
 }
 

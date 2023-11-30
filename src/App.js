@@ -1,4 +1,7 @@
+import {Switch, Route, Redirect} from 'react-router-dom'
+
 import TaskManagement from './components/TaskManagement'
+import NotFound from './components/NotFound'
 
 import './App.css'
 
@@ -6,7 +9,11 @@ import './App.css'
 
 const App = () => (
   <>
-    <TaskManagement />
+    <Switch>
+      <Route exact path="/" component={TaskManagement} />
+      <Route path="/not-found" component={NotFound} />
+      <Redirect to="not-found" />
+    </Switch>
   </>
 )
 
